@@ -1,0 +1,31 @@
+root/
+├── src/
+│   ├── controllers
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   └── courseController.js
+│   ├── models/
+│   │   ├── userModel.js
+│   │   ├── courseModel.js
+│   │   └── progressModel.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   └── courseRoutes.js
+│   └── config/
+│       ├── database.js
+│       └── index.js
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   ├── images/
+│   ├── pages/
+│   │   └── mapa.html
+│   └── index.html
+├── .env
+├── .env.example
+├── .gitignore
+├── server.js
+└── package.json

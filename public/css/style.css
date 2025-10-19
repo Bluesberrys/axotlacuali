@@ -1,0 +1,250 @@
+:root {
+  --white: #eee;
+  --white-dark: #d6d6d6;
+  --white-darker: #c0c0c0;
+  --grey: #363636;
+  --yellow-light: #f8d63f;
+  --yellow-dark: #d4b42f;
+  --blue: #2c4f8d;
+  --teal: #69bda9;
+  --base-font-size: 16pt;
+}
+
+html {
+  font-size: var(--base-font-size);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  width: 100%;
+  background: linear-gradient(135deg, var(--yellow-light), var(--yellow-dark), var(--grey));
+  color: var(--white);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo img {
+  height: 5rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: var(--grey);
+}
+
+.hero {
+  background: url("https://www.cuautitlan.unam.mx/assets/img/mision/1.jpg") center/cover no-repeat;
+  width: 100%;
+  height: calc(80vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  text-align: center;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background: var(--blue);
+  color: var(--white);
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--yellow-dark);
+  color: var(--grey);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 0;
+  width: 100%;
+}
+
+.feature-title {
+  font-size: 2rem;
+}
+.feature-title h2 {
+  margin-bottom: 20px;
+  position: relative;
+}
+.feature-title h2::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 300px;
+  height: 10px;
+  background: linear-gradient(135deg, var(--yellow-dark), var(--grey));
+}
+
+.feature-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  background: var(--white-dark);
+  border-radius: 20px;
+  justify-items: center;
+}
+
+.feature-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+  margin: 30px;
+}
+
+.feature-side.img {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-side.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 20px 20px 0;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  padding: 40px;
+  background: var(--grey);
+  color: var(--white);
+}
+
+.footer-column h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  position: relative;
+}
+.footer-column h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(135deg, var(--yellow-dark), var(--grey));
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-column li {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-column a:hover {
+  color: var(--yellow-light);
+}
+
+.footer-rights {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Media queries */
+@media (max-width: 1440px), (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    margin: 0 5%;
+    padding: 30px;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 20px;
+  }
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
