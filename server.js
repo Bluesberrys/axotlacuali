@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/mapa", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "mapa.html"));
+  res.sendFile(path.join(__dirname, "public", "pages", "mapa.html"));
 });
 
 // start the server

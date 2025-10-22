@@ -3,6 +3,7 @@
   --white-dark: #d6d6d6;
   --white-darker: #c0c0c0;
   --grey: #363636;
+  --grey-dark: #282828;
   --yellow-light: #f8d63f;
   --yellow-dark: #d4b42f;
   --blue: #2c4f8d;
@@ -170,6 +171,12 @@ nav {
   color: var(--white);
 }
 
+.footer-column.summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .footer-column h3 {
   margin-bottom: 15px;
   font-size: 1.3rem;
@@ -200,6 +207,27 @@ nav {
 }
 .footer-column a:hover {
   color: var(--yellow-light);
+}
+
+.socials {
+  display: flex;
+  justify-content: space-between;
+}
+.socials a {
+  background-color: var(--grey-dark);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+.socials a:hover {
+  background-color: var(--yellow-light);
+  color: var(--grey);
 }
 
 .footer-rights {
