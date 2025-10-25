@@ -1,34 +1,17 @@
 <section class="list-menu">
-  <h2>Lugares de Interés</h2>
-  <div class="category">
-    <h3 class="category-title">Edificios</h3>
-    <% if (edificios && edificios.length > 0) { %>
-
-    <div class="items">
-      <!-- Items de edificios aquí -->
-      <% edificios.forEach(edificio => { %>
-
-      <a href="#">Edificio <%= edificio.nombre %></a>
-      <% }) %>
-    </div>
-    <% } else { %>
-    <p>No hay edificios disponibles.</p>
-    <% } %>
+  <h2>Edificios</h2>
+  <% if (edificios && edificios.length > 0) { %>
+  <div class="items">
+    <!-- Items de edificios aquí -->
+    <% edificios.forEach(edificio => { %>
+    <a href="#">Edificio <%= edificio.nombre %></a>
+    <% }) %>
   </div>
-  <div class="category">
-    <h3 class="category-title">Cafeterias</h3>
-    <div class="items">
-      <!-- Items de cafeterías aquí -->
-      <a href="#">Cafetería 1</a>
-      <a href="#">Cafetería 2</a>
-      <a href="#">Cafetería 3</a>
-      <a href="#">Cafetería 4</a>
-    </div>
-  </div>
+  <% } else { %>
+  <p>No hay edificios disponibles.</p>
+  <% } %>
 </section>
 <section class="map-container">
   <!-- iframe sketchfab here -->
   <iframe title="Recorrido Virtual FES Acatlán UNAM" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/bac0f877b039448a8c1f705847901699/embed?annotations_visible=1&ui_theme=dark&dnt=1"> </iframe>
-  <!-- placeholder -->
-  <!-- <img src="../images/Screenshot from 2025-10-21 22-24-36.png" alt=""> -->
 </section>

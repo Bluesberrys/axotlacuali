@@ -13,23 +13,13 @@ main {
   padding: 20px;
   border-radius: 15px;
 }
-.category {
-  background-color: var(--white-darker);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 15px;
-  border-radius: 10px;
-}
-.category-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
 .items {
+  background-color: var(--white-darker);
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 15px;
 }
 .items a {
   text-decoration: none;
@@ -46,16 +36,8 @@ main {
   border-radius: 15px;
   overflow: hidden;
 }
-
 .map-container iframe {
   width: 100%;
   height: 100%;
   border: none;
 }
-/* placeholder */
-.map-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* ==== */
