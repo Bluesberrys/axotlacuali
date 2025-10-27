@@ -35,11 +35,11 @@ app.get("/mapa", async (req, res) => {
 });
 
 app.get("/comida", async (req, res) => {
-  const lugaresComida = await readJSON("lugares_comida.json");
+  const restaurantes = await readJSON("restaurantes.json");
   res.render("pages/comida", {
     title: "Comida",
     pageCSS: "comida",
-    lugaresComida,
+    restaurantes,
   });
 });
 
