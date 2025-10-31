@@ -41,3 +41,9 @@ main {
   height: 100%;
   border: none;
 }
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}

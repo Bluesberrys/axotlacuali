@@ -118,6 +118,12 @@
   .hero p {
     font-size: 1.1rem;
   }
+  .feature {
+    padding: 60px 10px;
+  }
+  .feature-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {

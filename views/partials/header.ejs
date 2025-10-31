@@ -3,13 +3,22 @@
     <div class="logo">
       <a href="/"><img src="./images/Axotlacuali_logo.svg" alt="Axotlacuali Logo"></a>
     </div>
-    <div>
-      <ul class="nav-links">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/mapa">Mapa Virtual</a></li>
-        <li><a href="/comida">Lugares de Comida</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-      </ul>
-    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/mapa">Mapa Virtual</a></li>
+      <li><a href="/comida">Lugares de Comida</a></li>
+      <li><a href="/contacto">Contacto</a></li>
+    </ul>
   </nav>
 </header>
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>

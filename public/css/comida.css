@@ -150,3 +150,24 @@
   margin-bottom: 8px;
   font-size: 1.2rem;
 }
+
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+  .menu-modal {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 90%;
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+  .details-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
