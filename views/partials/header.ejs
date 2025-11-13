@@ -10,14 +10,13 @@
       <li><a href="/">Inicio</a></li>
       <li><a href="/mapa">Mapa Virtual</a></li>
       <li><a href="/comida">Lugares de Comida</a></li>
+      <li><a href="/admin">Gestión</a></li>
+      <% if (session && session.userId) { %>
+      <li><a href="/logout">Cerrar Sesión</a></li>
+      <% } else { %>
+      <li><a href="/login">Iniciar Sesión</a></li>
+      <li><a href="/register">Registrarse</a></li>
+      <% } %>
     </ul>
   </nav>
 </header>
-<script>
-  const toggleBtn = document.getElementById('menu-toggle');
-  const navLinks = document.getElementById('nav-links');
-
-  toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-</script>

@@ -1,0 +1,70 @@
+<div class="container py-4">
+  <h2 class="text-center mb-4">Menús de <%= restaurante.nombre %></h2>
+
+  <!-- Agregar nuevo plato -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Agregar Plato</h4>
+    </div>
+    <div class="card-body">
+      <form action="/admin/restaurantes/<%= restaurante.id %>/menus/agregar" method="POST">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Plato</label>
+            <input type="text" name="plato" class="form-control" required />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Precio Mín.</label>
+            <input type="number" step="0.01" name="precio" class="form-control" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Precio Máx.</label>
+            <input type="number" step="0.01" name="precioMax" class="form-control" />
+          </div>
+        </div>
+        <div class="mt-3 text-end">
+          <button class="btn btn-success" type="submit">Agregar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista de menús -->
+  <div class="card">
+    <div class="card-header bg-secondary text-white">
+      <h4 class="mb-0">Platos Registrados</h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Plato</th>
+            <th>Precio</th>
+            <th>Precio Max</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (menu.length === 0) { %>
+            <tr><td colspan="5" class="text-center">No hay platos registrados.</td></tr>
+          <% } %>
+          <% menu.forEach(item => { %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.plato %></td>
+            <td>$<%= item.precio %></td>
+            <td><%= item.precioMax ? '$' + item.precioMax : '-' %></td>
+            <td>
+              <a href="/admin/menus/<%= item.id %>/editar" class="btn btn-warning btn-sm">Editar</a>
+              <form action="/admin/menus/<%= item.id %>/eliminar" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este plato?')">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

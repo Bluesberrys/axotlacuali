@@ -20,18 +20,18 @@
         </div>
         <div class="detail-item">
           <h4>Tipo de comida:</h4>
-          <p><%= restaurante.tipoComida %></p>
+          <p><%= restaurante.tipo_comida %></p>
         </div>
         <div class="detail-item">
           <h4>Rango de precio:</h4>
-          <p><%= restaurante.rangoPrecio %></p>
+          <p><%= restaurante.rango_precio %></p>
         </div>
       </div>
       <div class="card-btns">
-        <% if (restaurante.urlDireccion) { %>
-        <a href="<%= restaurante.urlDireccion %>" class="btn"><i class="fa-solid fa-map-pin"></i> Ubicación</a>
+        <% if (restaurante.url_direccion) { %>
+        <a href="<%= restaurante.url_direccion %>" class="btn"><i class="fa-solid fa-map-pin"></i> Ubicación</a>
         <% } %>
-        <button class="btn menu-btn" id="abrirMenu<%= index + 1 %>"><i class="fa-solid fa-utensils"></i> Ver menú</button>
+        <button class="btn menu-btn" id="abrirMenu_<%= index + 1 %>"><i class="fa-solid fa-utensils"></i> Ver menú</button>
       </div>
     </div>
     <div class="card-image">
@@ -39,34 +39,23 @@
     </div>
 
     <!-- Modal para menú -->
-    <dialog class="menu-modal" id="menuModal<%= index + 1 %>">
+    <dialog class="menu-modal" id="menuModal_<%= index + 1 %>">
       <div class="menu-content">
-        <span class="btn close-btn" id="cerrarMenu<%= index + 1 %>"><i class="fa-solid fa-x"></i></span>
+        <span class="btn close-btn" id="cerrarMenu_<%= index + 1 %>"><i class="fa-solid fa-x"></i></span>
         <h3>Menú de <%= restaurante.nombre %></h3>
         <ul>
-          <% restaurante.menu.forEach(item => { %>
-          <li><strong><%= item.plato %></strong>: $<%= item.precio %><% if (item.precioMax) { %>
-            - $<%= item.precioMax %>
+          <% menus.forEach(menu_item => { %>
+          <% if (menu_item.id_restaurantes == (index + 1)) { %>
+          <li><strong><%= menu_item.plato %></strong>: $<%= menu_item.precio %><% if (menu_item.precio_max > 0) { %>
+            - $<%= menu_item.precio_max %>
             <% } %></li>
+          <% } %>
           <% }) %>
         </ul>
       </div>
     </dialog>
 
-    <script>
-      // Objetos DOM
-      const abrirMenuBtn<%= index + 1 %> = document.getElementById('abrirMenu<%= index + 1 %>');
-      const cerrarMenuBtn<%= index + 1 %> = document.getElementById('cerrarMenu<%= index + 1 %>');
-      const menuModal<%= index + 1 %> = document.getElementById('menuModal<%= index + 1 %>');
-
-      abrirMenuBtn<%= index + 1 %>.onclick = () => menuModal<%= index + 1 %>.showModal();
-      cerrarMenuBtn<%= index + 1 %>.onclick = () => menuModal<%= index + 1 %>.close();
-
-      // Cerrar al hacer clic fuera del modal
-      window.addEventListener("click", e => {
-        if (e.target === menuModal<%= index + 1 %>) menuModal<%= index + 1 %>.close();
-      });
-    </script>
   </div>
   <% }) %>
 </div>
+<script src="./js/comida.js"></script>
