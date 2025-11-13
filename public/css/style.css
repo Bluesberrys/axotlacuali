@@ -2,6 +2,7 @@
   --white: #eee;
   --white-dark: #d6d6d6;
   --white-darker: #c0c0c0;
+  --grey-light: #4f4f4f;
   --grey: #363636;
   --grey-dark: #282828;
   --yellow-light: #f8d63f;
@@ -35,7 +36,7 @@ nav {
 }
 
 .logo img {
-  height: 5rem;
+  height: 3rem;
 }
 
 .nav-links {

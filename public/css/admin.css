@@ -1,0 +1,173 @@
+.page-title {
+  margin: 40px 0;
+  color: var(--grey-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.page-title h2 {
+  margin-bottom: 20px;
+  position: relative;
+}
+.page-title h2::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 250px;
+  height: 10px;
+  background: linear-gradient(135deg, var(--yellow-dark), var(--grey));
+}
+
+.admin-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr auto;
+  gap: 30px;
+  margin: 0 2%;
+  margin-bottom: 60px;
+}
+
+.admin-side {
+  background-color: var(--white-dark);
+  padding: 20px;
+  border-radius: 15px;
+}
+.admin-side h3 {
+  font-size: 1.5rem;
+  color: var(--grey-dark);
+  margin-bottom: 30px;
+  position: relative;
+}
+.admin-side h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 150px;
+  height: 5px;
+  background: linear-gradient(135deg, var(--yellow-dark), var(--grey));
+}
+
+.add-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.add-form .form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.add-form .form-item label {
+  font-size: 1.2rem;
+  color: var(--grey-dark);
+}
+.add-form .form-item input,
+.add-form .form-item textarea {
+  padding: 10px;
+  border: 2px solid var(--grey);
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.add-form .form-item textarea {
+  height: 150px;
+}
+
+.crud-table {
+  grid-row: span 2;
+}
+
+.crud-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.crud-table thead {
+  background-color: var(--grey-light);
+  color: var(--white);
+}
+.crud-table th {
+  font-size: 1.1rem;
+}
+.crud-table th,
+.crud-table td {
+  padding: 12px 15px;
+  text-align: left;
+  vertical-align: middle;
+}
+.crud-table tbody tr:nth-child(even) {
+  background-color: var(--white-darker);
+}
+.crud-table tbody tr:nth-child(odd) {
+  background-color: var(--white);
+}
+
+.crud-table .btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+.crud-table .btns form {
+  height: 100%;
+}
+.crud-table .btns a,
+.crud-table .btns button {
+  font-size: 0.6rem;
+  height: 100%;
+  width: max-content;
+}
+
+.btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--blue);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: var(--yellow-dark);
+  color: var(--grey);
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+}
+.btn-danger:hover {
+  background-color: #c0392b;
+  color: var(--white);
+}
+
+.confirm-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-width: 400px;
+  width: 90%;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  width: min(90%, 400px);
+  z-index: 1000;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.confirm-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}

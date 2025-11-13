@@ -13,8 +13,10 @@ axotlacuali
 ├─ package.json
 ├─ public
 │  ├─ css
+│  │  ├─ admin.css
 │  │  ├─ comida.css
 │  │  ├─ index.css
+│  │  ├─ login.css
 │  │  ├─ mapa.css
 │  │  └─ style.css
 │  ├─ images
@@ -22,16 +24,15 @@ axotlacuali
 │  │  ├─ imgPlaceholder.jpg
 │  │  └─ map.png
 │  └─ js
+│     ├─ admin.js
+│     ├─ comida.js
 │     └─ main.js
 ├─ server.js
 ├─ src
 │  ├─ config
-│  ├─ controllers
+│  │  └─ db.js
 │  ├─ data
-│  │  ├─ edificios.json
-│  │  └─ restaurantes.json
-│  ├─ models
-│  ├─ routes
+│  │  └─ edificios.json
 │  └─ utils
 │     └─ fileRead.js
 └─ views
@@ -39,9 +40,14 @@ axotlacuali
    │  └─ main.ejs
    ├─ pages
    │  ├─ comida.ejs
+   │  ├─ gestion.ejs
    │  ├─ index.ejs
-   │  └─ mapa.ejs
+   │  ├─ login.ejs
+   │  ├─ mapa.ejs
+   │  ├─ menus.ejs
+   │  └─ register.ejs
    └─ partials
+      ├─ confirm-dialog.ejs
       ├─ footer.ejs
       └─ header.ejs
 

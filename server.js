@@ -88,8 +88,6 @@ app.get("/comida", async (req, res) => {
   try {
     const [restaurantes] = await db.execute("SELECT * FROM restaurantes");
     const [menus] = await db.execute("SELECT * FROM menus");
-    console.log(restaurantes);
-    console.log(menus);
     res.render("pages/comida", {
       title: "Comida",
       pageCSS: "comida",
@@ -104,7 +102,7 @@ app.get("/comida", async (req, res) => {
 
 // Rutas de autenticación
 app.get("/login", (req, res) => {
-  res.render("pages/login", { title: "Iniciar Sesión", pageCSS: "style" });
+  res.render("pages/login", { title: "Iniciar Sesión", pageCSS: "login" });
 });
 
 app.post("/login", loginLimiter, async (req, res) => {
@@ -132,7 +130,7 @@ app.post("/login", loginLimiter, async (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  res.render("pages/register", { title: "Registro", pageCSS: "style" });
+  res.render("pages/register", { title: "Registro", pageCSS: "login" });
 });
 
 app.post("/register", async (req, res) => {
@@ -180,7 +178,7 @@ app.get("/admin", async (req, res) => {
   const [restaurantes] = await db.execute("SELECT * FROM restaurantes");
   res.render("pages/gestion", {
     title: "Gestión",
-    pageCSS: "gestion",
+    pageCSS: "admin",
     restaurantes,
   });
 });
@@ -195,16 +193,18 @@ app.post("/admin/restaurantes/agregar", async (req, res) => {
 });
 
 app.post("/admin/restaurantes/:id/eliminar", async (req, res) => {
-  await db.execute("DELETE FROM restaurantes WHERE id = ?", [req.params.id]);
+  await db.execute("DELETE FROM restaurantes WHERE id_restaurantes = ?", [req.params.id]);
   res.redirect("/admin");
 });
 
 app.get("/admin/restaurantes/:id/menus", async (req, res) => {
-  const [restauranteRows] = await db.execute("SELECT * FROM restaurantes WHERE id = ?", [req.params.id]);
-  const [menuRows] = await db.execute("SELECT * FROM menus WHERE restaurante_id = ?", [req.params.id]);
+  const [restauranteRows] = await db.execute("SELECT * FROM restaurantes WHERE id_restaurantes = ?", [
+    req.params.id,
+  ]);
+  const [menuRows] = await db.execute("SELECT * FROM menus WHERE id_restaurantes = ?", [req.params.id]);
   res.render("pages/menus", {
-    title: "Menús",
-    pageCSS: "gestion",
+    title: "Menus",
+    pageCSS: "admin",
     restaurante: restauranteRows[0],
     menu: menuRows,
   });
@@ -212,7 +212,7 @@ app.get("/admin/restaurantes/:id/menus", async (req, res) => {
 
 app.post("/admin/restaurantes/:id/menus/agregar", async (req, res) => {
   const { plato, precio, precioMax } = req.body;
-  await db.execute("INSERT INTO menu (restaurante_id, plato, precio, precioMax) VALUES (?, ?, ?, ?)", [
+  await db.execute("INSERT INTO menus (id_restaurantes, plato, precio, precioMax) VALUES (?, ?, ?, ?)", [
     req.params.id,
     plato,
     precio,
@@ -222,8 +222,8 @@ app.post("/admin/restaurantes/:id/menus/agregar", async (req, res) => {
 });
 
 app.post("/admin/menus/:id/eliminar", async (req, res) => {
-  await db.execute("DELETE FROM menu WHERE id = ?", [req.params.id]);
-  res.redirect("back");
+  await db.execute("DELETE FROM menus WHERE id_menu = ?", [req.params.id]);
+  res.redirect(`/admin/restaurantes/${req.body.id_restaurante}/menus`);
 });
 
 app.listen(PORT, () => {
