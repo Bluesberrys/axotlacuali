@@ -10,7 +10,9 @@
       <li><a href="/">Inicio</a></li>
       <li><a href="/mapa">Mapa Virtual</a></li>
       <li><a href="/comida">Lugares de Comida</a></li>
+      <% if (session && session.role === "admin") { %>
       <li><a href="/admin">Gestión</a></li>
+      <% } %>
       <% if (session && session.userId) { %>
       <li><a href="/logout">Cerrar Sesión</a></li>
       <% } else { %>

@@ -1,7 +1,6 @@
 import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import path from "path";
-import { readJSON } from "./src/utils/fileRead.js";
 import { fileURLToPath } from "url";
 import mysql from "mysql2/promise";
 import session from "express-session";
@@ -9,6 +8,9 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+// Importar locales
+import adminRoutes from "./src/routes/adminRoutes.js";
+import { readJSON } from "./src/utils/fileRead.js";
 
 dotenv.config();
 
@@ -122,8 +124,10 @@ app.post("/login", loginLimiter, async (req, res) => {
     if (!match) {
       return res.status(401).send("Credenciales inválidas");
     }
-    req.session.userId = user.id;
+    req.session.userId = user.id_usuario;
     req.session.username = user.username;
+    req.session.role = user.rol;
+    console.log(`[LOGIN] Successful login for user: ${user.username} (role: ${user.rol})`);
     res.redirect("/");
   } catch (error) {
     console.error(error);
@@ -154,6 +158,7 @@ app.post("/register", async (req, res) => {
       email,
       hashedPassword,
     ]);
+    console.log(`[REGISTER] New user registered: ${username}`);
     res.redirect("/login");
   } catch (error) {
     console.error(error);
@@ -162,8 +167,14 @@ app.post("/register", async (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+  if (req.session.username) {
+    console.log(`[LOGOUT] User ${req.session.username} (role: ${req.session.role}) logged out`);
+  } else {
+    console.log("[LOGOUT] Session ended — no active user found");
+  }
   req.session.destroy((err) => {
     if (err) {
+      console.error("[LOGOUT] Error destroying session:", err);
       return res.redirect("/");
     }
     res.clearCookie("connect.sid");
@@ -174,57 +185,7 @@ app.get("/logout", (req, res) => {
 // Pagina principal de gestión
 // Ruta para el panel de gestion
 app.use(express.urlencoded({ extended: true }));
-
-// Página principal de gestión
-app.get("/admin", async (req, res) => {
-  const [restaurantes] = await db.execute("SELECT * FROM restaurantes");
-  res.render("pages/gestion", {
-    title: "Gestión",
-    pageCSS: "gestion",
-    restaurantes,
-  });
-});
-
-app.post("/admin/restaurantes/agregar", async (req, res) => {
-  const { nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion } = req.body;
-  await db.execute(
-    "INSERT INTO restaurantes (nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion]
-  );
-  res.redirect("/admin");
-});
-
-app.post("/admin/restaurantes/:id/eliminar", async (req, res) => {
-  await db.execute("DELETE FROM restaurantes WHERE id = ?", [req.params.id]);
-  res.redirect("/admin");
-});
-
-app.get("/admin/restaurantes/:id/menus", async (req, res) => {
-  const [restauranteRows] = await db.execute("SELECT * FROM restaurantes WHERE id = ?", [req.params.id]);
-  const [menuRows] = await db.execute("SELECT * FROM menus WHERE restaurante_id = ?", [req.params.id]);
-  res.render("pages/menus", {
-    title: "Menús",
-    pageCSS: "gestion",
-    restaurante: restauranteRows[0],
-    menu: menuRows,
-  });
-});
-
-app.post("/admin/restaurantes/:id/menus/agregar", async (req, res) => {
-  const { plato, precio, precioMax } = req.body;
-  await db.execute("INSERT INTO menu (restaurante_id, plato, precio, precioMax) VALUES (?, ?, ?, ?)", [
-    req.params.id,
-    plato,
-    precio,
-    precioMax || null,
-  ]);
-  res.redirect(`/admin/restaurantes/${req.params.id}/menus`);
-});
-
-app.post("/admin/menus/:id/eliminar", async (req, res) => {
-  await db.execute("DELETE FROM menu WHERE id = ?", [req.params.id]);
-  res.redirect("back");
-});
+app.use("/admin", adminRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

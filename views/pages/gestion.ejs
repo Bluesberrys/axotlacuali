@@ -67,14 +67,14 @@
           <% } %>
           <% restaurantes.forEach(r => { %>
           <tr>
-            <td><%= r.id %></td>
+            <td><%= r.id_restaurantes %></td>
             <td><%= r.nombre %></td>
-            <td><%= r.tipoComida %></td>
+            <td><%= r.tipo_comida %></td>
             <td><%= r.horario %></td>
             <td>
-              <a href="/admin/restaurantes/<%= r.id %>/editar" class="btn btn-warning btn-sm">Editar</a>
-              <a href="/admin/restaurantes/<%= r.id %>/menus" class="btn btn-info btn-sm">Menús</a>
-              <form action="/admin/restaurantes/<%= r.id %>/eliminar" method="POST" class="d-inline">
+              <a href="/admin/restaurantes/<%= r.id_restaurantes %>/editar" class="btn btn-warning btn-sm">Editar</a>
+              <a href="/admin/restaurantes/<%= r.id_restaurantes %>/menus" class="btn btn-info btn-sm">Menús</a>
+              <form action="/admin/restaurantes/<%= r.id_restaurantes %>/eliminar" method="POST" class="d-inline">
                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este restaurante?')">Eliminar</button>
               </form>
             </td>
