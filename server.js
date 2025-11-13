@@ -122,7 +122,7 @@ app.post("/login", loginLimiter, async (req, res) => {
     if (!match) {
       return res.status(401).send("Credenciales inválidas");
     }
-    req.session.userId = user.id;
+    req.session.userId = user.id_usuario;
     req.session.username = user.username;
     res.redirect("/");
   } catch (error) {
