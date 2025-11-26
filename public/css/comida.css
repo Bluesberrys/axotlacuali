@@ -92,10 +92,20 @@
   color: var(--grey);
 }
 
+.card-image {
+  display: flex;
+  align-items: center;
+}
+
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-image video {
+  width: 100%;
   border-radius: 10px;
 }
 

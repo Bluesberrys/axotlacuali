@@ -42,9 +42,9 @@ CREATE TABLE menus (
 );
 
 INSERT INTO restaurantes (nombre, descripcion, horario, tipo_comida, rango_precio, imagen, url_direccion) 
-VALUES ('Cafetería Veterinaria', 'Aquí podrás disfrutar de deliciosos desayunos completos que te llenarán de energía, se encuentra justo dentro de las instalaciones de la facultad, puedes tomar como referencia el auditorio.', 'Lun - Dom: 8:00 - 20:00', 'Comida corrida y platillos rápidos', '$30 - $150', './images/imgPlaceholder.jpg', 'https://www.google.com/maps/@19.6896373,-99.186863,19.5z?entry=ttu&g_ep=EgoyMDI1MTAyMC4wIKXMDSoASAFQAw%3D%3D'),
-('Cafetería Ingeniería','Ofrece una variedad de platillos para el desayuno, comida y cena. Ubicada dentro de la facultad de ingeniería, es una opción conveniente para estudiantes y personal.','Lun - Dom: 8:00 - 20:00','Comida corrida y platillos rápidos','$30 - $150','./images/imgPlaceholder.jpg',''),
-('Cafetería [tbd: carpas]', 'Ubicada en el área de el acceso principal, esta cafetería ofrece una variedad de platillos rápidos y económicos, ideal para estudiantes que buscan una comida rápida entre clases.', 'Lun - Dom: 7:30 - 20:00', 'Comida corrida y platillos rápidos', '$30 - $180', './images/imgPlaceholder.jpg', '');
+VALUES ('Cafetería Veterinaria', 'Aquí podrás disfrutar de deliciosos desayunos completos que te llenarán de energía, se encuentra justo dentro de las instalaciones de la facultad, puedes tomar como referencia el auditorio.', 'Lun - Dom: 8:00 - 20:00', 'Comida corrida y platillos rápidos', '$30 - $150', './videos/Cafe vete.mp4', 'https://www.google.com/maps/@19.6896373,-99.186863,19.5z?entry=ttu&g_ep=EgoyMDI1MTAyMC4wIKXMDSoASAFQAw%3D%3D'),
+('Cafetería Ingeniería','Ofrece una variedad de platillos para el desayuno, comida y cena. Ubicada dentro de la facultad de ingeniería, es una opción conveniente para estudiantes y personal.','Lun - Dom: 8:00 - 20:00','Comida corrida y platillos rápidos','$30 - $150','./videos/Cafe inge.mp4',''),
+('Cafetería [tbd: carpas]', 'Ubicada en el área de el acceso principal, esta cafetería ofrece una variedad de platillos rápidos y económicos, ideal para estudiantes que buscan una comida rápida entre clases.', 'Lun - Dom: 7:30 - 20:00', 'Comida corrida y platillos rápidos', '$30 - $180', './videos/Cafe carpas.mp4', '');
 
 INSERT INTO menus (id_restaurantes, plato, precio, precio_max) VALUES
 ('1','Desayuno completo','80','0'), 

@@ -7,7 +7,6 @@ import mysql from "mysql2/promise";
 import session from "express-session";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 
 dotenv.config();
@@ -27,7 +26,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/fontawesome", express.static(path.join(__dirname, "node_modules/@fortawesome/fontawesome-free")));
 
 // middlewares adicionales de seguridad y parsing
-app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
