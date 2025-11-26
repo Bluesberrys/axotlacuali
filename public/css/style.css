@@ -43,6 +43,7 @@ nav {
   list-style: none;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .nav-links a {
@@ -66,6 +67,59 @@ nav {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+/* Icono del Ajolote */
+.ajolote-container {
+  position: relative;
+  list-style: none;
+}
+
+.ajolote-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ajolote-icon {
+  width: 3.5rem;
+  border-radius: 50%;
+}
+
+/* Dropdown */
+.ajolote-dropdown {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  gap: 10px;
+  right: 0;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px 10px;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+}
+
+.ajolote-dropdown a {
+  color: var(--grey-dark);
+}
+.ajolote-dropdown a:hover {
+  color: var(--white);
+}
+
+.ajolote-dropdown h3 {
+  padding: 10px 15px;
+  color: var(--grey-dark);
+}
+.ajolote-dropdown h3::after {
+  content: "";
+  position: absolute;
+  top: 65px;
+  left: 15px;
+  width: 100px;
+  height: 5px;
+  background: linear-gradient(135deg, var(--yellow-dark), var(--grey));
 }
 
 /* Footer */

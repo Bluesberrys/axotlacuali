@@ -10,13 +10,25 @@
       <li><a href="/">Inicio</a></li>
       <li><a href="/mapa">Mapa Virtual</a></li>
       <li><a href="/comida">Lugares de Comida</a></li>
+      <% if (session.username && session.rol === 'admin') { %>
       <li><a href="/admin">Gestión</a></li>
-      <% if (session && session.userId) { %>
-      <li><a href="/logout">Cerrar Sesión</a></li>
-      <% } else { %>
-      <li><a href="/login">Iniciar Sesión</a></li>
-      <li><a href="/register">Registrarse</a></li>
       <% } %>
+      <!-- MENÚ DEL AJOLOTE -->
+      <li class="ajolote-container">
+        <button class="ajolote-btn" id="ajoloteMenuBtn">
+          <img src="/images/AxoFace.png" alt="Ajolote" class="ajolote-icon">
+        </button>
+
+        <div class="ajolote-dropdown" id="ajoloteMenu">
+          <% if (!session.username) { %>
+          <a href="/login">Iniciar sesión</a>
+          <a href="/register">Registrarse</a>
+          <% } else { %>
+          <h3>Hola, <%= session.username %></h3>
+          <a href="/logout">Cerrar sesión</a>
+          <% } %>
+        </div>
+      </li>
     </ul>
   </nav>
 </header>

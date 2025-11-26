@@ -61,11 +61,22 @@ const loginLimiter = rateLimit({
   message: { error: "Demasiados intentos, intenta más tarde." },
 });
 
-// Middleware to make session available to all views
+// Middleware para exponer la sesión a todas las vistas
 app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
 });
+
+// Middleware para verificar si el usuario es administrador
+function checkAdmin(req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect("/login");
+  }
+  if (req.session.rol !== "admin") {
+    return res.status(403).send("Acceso denegado: No tienes permisos de administrador.");
+  }
+  next();
+}
 
 // rutas existentes
 app.get("/", (req, res) => {
@@ -122,6 +133,7 @@ app.post("/login", loginLimiter, async (req, res) => {
     }
     req.session.userId = user.id_usuario;
     req.session.username = user.username;
+    req.session.rol = user.rol;
     res.redirect("/");
   } catch (error) {
     console.error(error);
@@ -174,7 +186,7 @@ app.get("/logout", (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 
 // Página principal de gestión
-app.get("/admin", async (req, res) => {
+app.get("/admin", checkAdmin, async (req, res) => {
   const [restaurantes] = await db.execute("SELECT * FROM restaurantes");
   res.render("pages/gestion", {
     title: "Gestión",
@@ -183,7 +195,7 @@ app.get("/admin", async (req, res) => {
   });
 });
 
-app.post("/admin/restaurantes/agregar", async (req, res) => {
+app.post("/admin/restaurantes/agregar", checkAdmin, async (req, res) => {
   const { nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion } = req.body;
   await db.execute(
     "INSERT INTO restaurantes (nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)",
@@ -192,12 +204,12 @@ app.post("/admin/restaurantes/agregar", async (req, res) => {
   res.redirect("/admin");
 });
 
-app.post("/admin/restaurantes/:id/eliminar", async (req, res) => {
+app.post("/admin/restaurantes/:id/eliminar", checkAdmin, async (req, res) => {
   await db.execute("DELETE FROM restaurantes WHERE id_restaurantes = ?", [req.params.id]);
   res.redirect("/admin");
 });
 
-app.get("/admin/restaurantes/:id/menus", async (req, res) => {
+app.get("/admin/restaurantes/:id/menus", checkAdmin, async (req, res) => {
   const [restauranteRows] = await db.execute("SELECT * FROM restaurantes WHERE id_restaurantes = ?", [
     req.params.id,
   ]);
@@ -210,7 +222,7 @@ app.get("/admin/restaurantes/:id/menus", async (req, res) => {
   });
 });
 
-app.post("/admin/restaurantes/:id/menus/agregar", async (req, res) => {
+app.post("/admin/restaurantes/:id/menus/agregar", checkAdmin, async (req, res) => {
   const { plato, precio, precioMax } = req.body;
   await db.execute("INSERT INTO menus (id_restaurantes, plato, precio, precioMax) VALUES (?, ?, ?, ?)", [
     req.params.id,
@@ -221,7 +233,7 @@ app.post("/admin/restaurantes/:id/menus/agregar", async (req, res) => {
   res.redirect(`/admin/restaurantes/${req.params.id}/menus`);
 });
 
-app.post("/admin/menus/:id/eliminar", async (req, res) => {
+app.post("/admin/menus/:id/eliminar", checkAdmin, async (req, res) => {
   await db.execute("DELETE FROM menus WHERE id_menu = ?", [req.params.id]);
   res.redirect(`/admin/restaurantes/${req.body.id_restaurante}/menus`);
 });
