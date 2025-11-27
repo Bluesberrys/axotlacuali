@@ -159,6 +159,7 @@
   text-align: center;
   width: min(90%, 400px);
   z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .dialog-buttons {
@@ -170,4 +171,266 @@
 
 .confirm-dialog::backdrop {
   background: rgba(0, 0, 0, 0.4);
+}
+
+.edit-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: clamp(320px, 70vw, 600px);
+  padding: 1.5rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: var(--white-dark);
+  z-index: 500;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.edit-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.edit-dialog.two-col {
+  width: clamp(500px, 70vw, 750px);
+}
+
+.edit-dialog.one-col {
+  width: clamp(320px, 60vw, 500px);
+}
+
+.edit-dialog h3 {
+  font-size: 1.5rem;
+  color: var(--grey-dark);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.edit-dialog h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 150px;
+  height: 5px;
+  background: linear-gradient(135deg, var(--yellow-dark), var(--grey));
+}
+
+.dialog-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-2col {
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
+
+.form-2col .form-buttons {
+  grid-column: 2 / 3;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.form-1col {
+  grid-template-columns: 1fr;
+}
+
+.form-1col .form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.edit-dialog .form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.edit-dialog label {
+  font-size: 1.1rem;
+  color: var(--grey-dark);
+}
+
+.edit-dialog input,
+.edit-dialog textarea {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--grey);
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--grey-dark);
+  resize: vertical;
+}
+
+.edit-dialog textarea {
+  height: 110px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin-container {
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .admin-side h3 {
+    font-size: 1.3rem;
+  }
+
+  .crud-table th,
+  .crud-table td {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .admin-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .crud-table {
+    grid-row: auto;
+  }
+
+  .admin-side {
+    padding: 15px;
+  }
+
+  .page-title h2::after {
+    width: 180px;
+  }
+
+  .edit-dialog {
+    width: 90vw !important;
+  }
+
+  .edit-dialog.two-col {
+    width: 95vw !important;
+  }
+
+  .form-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .form-2col .form-buttons {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .page-title h2::after {
+    width: 130px;
+  }
+
+  .admin-side h3 {
+    font-size: 1.2rem;
+  }
+
+  .crud-table table,
+  .crud-table thead {
+    display: block;
+  }
+
+  .crud-table thead {
+    display: none;
+  }
+
+  .crud-table tbody tr {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .crud-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 5px;
+    font-size: 0.9rem;
+  }
+
+  .crud-table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--grey-dark);
+    margin-right: 10px;
+  }
+
+  .crud-table .btns {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .crud-table .btns a,
+  .crud-table .btns button {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+
+  .edit-dialog,
+  .confirm-dialog {
+    width: 95% !important;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .page-title {
+    font-size: 1.1rem;
+  }
+
+  .admin-side {
+    padding: 10px;
+  }
+
+  .add-form .form-item label {
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .crud-table tbody td {
+    font-size: 0.82rem;
+  }
+
+  .crud-table .btns {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .crud-table .btns a,
+  .crud-table .btns button {
+    width: 100%;
+  }
 }

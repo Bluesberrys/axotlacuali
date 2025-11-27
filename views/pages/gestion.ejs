@@ -57,14 +57,17 @@
         <% } %>
         <% restaurantes.forEach(r => { %>
         <tr>
-          <td><%= r.id_restaurantes %></td>
-          <td><%= r.nombre %></td>
-          <td><%= r.tipo_comida %></td>
-          <td><%= r.horario %></td>
+          <td data-label="ID"><%= r.id_restaurantes %></td>
+          <td data-label="Nombre"><%= r.nombre %></td>
+          <td data-label="Tipo"><%= r.tipo_comida %></td>
+          <td data-label="Horario"><%= r.horario %></td>
           <td>
             <div class="btns">
               <a href="/admin/restaurantes/<%= r.id_restaurantes %>/menus" class="btn"><i class="fa-solid fa-list"></i> Menu</a>
-              <a href="/admin/restaurantes/<%= r.id_restaurantes %>/editar" class="btn"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+              <button type="button" class="btn edit-res-btn" data-id="<%= r.id_restaurantes %>" data-nombre="<%= r.nombre %>" data-tipo="<%= r.tipo_comida %>" data-descripcion="<%= r.descripcion %>" data-horario="<%= r.horario %>" data-rango="<%= r.rango_precio %>" data-imagen="<%= r.imagen %>" data-direccion="<%= r.url_direccion %>">
+                <i class="fa-solid fa-pen-to-square"></i> Editar
+              </button>
+
               <form action="/admin/restaurantes/<%= r.id_restaurantes %>/eliminar" method="POST" class="needs-confirm" data-confirm="Eliminar este restaurante?">
                 <button type="submit" class="btn btn-danger"><i class="fa-solid fa-x"></i></button>
               </form>
@@ -78,4 +81,52 @@
 </div>
 
 <%- include('../partials/confirm-dialog') %>
+<!-- Dialog para editar -->
+<dialog id="editRestaurantDialog" class="edit-dialog two-col">
+  <h3>Editar restaurante</h3>
+  <form id="editRestaurantForm" method="POST" class="dialog-form form-2col needs-confirm" data-confirm="Guardar los cambios?">
+    <div class="form-item">
+      <label>Nombre</label>
+      <input type="text" id="editResNombre" name="nombre" required />
+    </div>
+
+    <div class="form-item">
+      <label>Tipo de Comida</label>
+      <input type="text" id="editResTipo" name="tipoComida" />
+    </div>
+
+    <div class="form-item">
+      <label>Descripción</label>
+      <textarea id="editResDesc" name="descripcion" rows="2"></textarea>
+    </div>
+
+    <div class="form-item">
+      <label>Horario</label>
+      <input type="text" id="editResHorario" name="horario" />
+    </div>
+
+    <div class="form-item">
+      <label>Rango de Precio</label>
+      <input type="text" id="editResRango" name="rangoPrecio" />
+    </div>
+
+    <div class="form-item">
+      <label>URL Imagen</label>
+      <input type="text" id="editResImagen" name="imagen" />
+    </div>
+
+    <div class="form-item">
+      <label>URL Dirección</label>
+      <input type="text" id="editResDireccion" name="urlDireccion" />
+    </div>
+
+    <input type="hidden" id="editResId" name="id_restaurantes" />
+
+    <div class="form-buttons">
+      <button type="submit" class="btn">Guardar cambios</button>
+      <button type="button" id="editResCancel" class="btn btn-danger">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
 <script src="/js/admin.js" defer></script>

@@ -196,9 +196,22 @@ app.get("/admin", checkAdmin, async (req, res) => {
 app.post("/admin/restaurantes/agregar", checkAdmin, async (req, res) => {
   const { nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion } = req.body;
   await db.execute(
-    "INSERT INTO restaurantes (nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO restaurantes (nombre, descripcion, horario, tipo_comida, rango_precio, imagen, url_direccion) VALUES (?, ?, ?, ?, ?, ?, ?)",
     [nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion]
   );
+  res.redirect("/admin");
+});
+
+app.post("/admin/restaurantes/:id/editar", checkAdmin, async (req, res) => {
+  const { nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion } = req.body;
+
+  await db.execute(
+    `UPDATE restaurantes 
+     SET nombre = ?, descripcion = ?, horario = ?, tipo_comida = ?, rango_precio = ?, imagen = ?, url_direccion = ?
+     WHERE id_restaurantes = ?`,
+    [nombre, descripcion, horario, tipoComida, rangoPrecio, imagen, urlDireccion, req.params.id]
+  );
+
   res.redirect("/admin");
 });
 
@@ -222,13 +235,26 @@ app.get("/admin/restaurantes/:id/menus", checkAdmin, async (req, res) => {
 
 app.post("/admin/restaurantes/:id/menus/agregar", checkAdmin, async (req, res) => {
   const { plato, precio, precioMax } = req.body;
-  await db.execute("INSERT INTO menus (id_restaurantes, plato, precio, precioMax) VALUES (?, ?, ?, ?)", [
+  await db.execute("INSERT INTO menus (id_restaurantes, plato, precio, precio_max) VALUES (?, ?, ?, ?)", [
     req.params.id,
     plato,
     precio,
     precioMax || null,
   ]);
   res.redirect(`/admin/restaurantes/${req.params.id}/menus`);
+});
+
+app.post("/admin/menus/:id/editar", checkAdmin, async (req, res) => {
+  const { id_restaurante, plato, precio, precioMax } = req.body;
+
+  await db.execute(
+    `UPDATE menus 
+     SET plato = ?, precio = ?, precio_max = ?
+     WHERE id_menu = ?`,
+    [plato, precio, precioMax, req.params.id]
+  );
+
+  res.redirect(`/admin/restaurantes/${id_restaurante}/menus`);
 });
 
 app.post("/admin/menus/:id/eliminar", checkAdmin, async (req, res) => {

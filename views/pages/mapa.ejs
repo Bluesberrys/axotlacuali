@@ -1,17 +1,6 @@
-<section class="list-menu">
-  <h2>Edificios</h2>
-  <% if (edificios && edificios.length > 0) { %>
-  <div class="items">
-    <!-- Items de edificios aquí -->
-    <% edificios.forEach(edificio => { %>
-    <a href="#">Edificio <%= edificio.nombre %></a>
-    <% }) %>
-  </div>
-  <% } else { %>
-  <p>No hay edificios disponibles.</p>
-  <% } %>
-</section>
 <section class="map-container">
-  <!-- iframe sketchfab here -->
-  <iframe title="Recorrido Virtual FES Acatlán UNAM" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/bac0f877b039448a8c1f705847901699/embed?annotations_visible=1&ui_theme=dark&dnt=1"> </iframe>
+  <!-- Sketchfab Embed -->
+  <iframe title="FESCUAUTITLAN" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/e0481074e7994967af3200db4c54ab5e/embed"> </iframe>
+  <!-- Imagen para disposivos moviles -->
+  <img src="/images/mapa-fesc.png" alt="Mapa FESC">
 </section>
