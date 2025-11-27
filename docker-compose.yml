@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: axotlacuali_app
+    restart: unless-stopped
+    ports:
+      - "5900:5900"
+    environment:
+      NODE_ENV: production
+      SESSION_SECURE: "false"
+      PORT: 5900
+      SESSION_SECRET: "superSecretKey"
+      DB_HOST: mariadb
+      DB_USER: user
+      DB_PASS: root
+      DB_NAME: axotlacuali
+    depends_on:
+      - mariadb
+    networks:
+      - appnet
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: axotlacuali
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - appnet
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
+    networks:
+      - appnet
+    # Access: http://localhost:8080
+
+volumes:
+  mariadb_data:
+
+networks:
+  appnet:

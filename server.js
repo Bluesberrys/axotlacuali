@@ -6,10 +6,7 @@ import { fileURLToPath } from "url";
 import mysql from "mysql2/promise";
 import session from "express-session";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5900;
@@ -34,17 +31,17 @@ app.use(
     secret: process.env.SESSION_SECRET || "a secret key",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: process.env.NODE_ENV === "production" },
+    cookie: { secure: process.env.SESSION_SECURE === "production" },
   })
 );
 
 let db;
 try {
   db = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "axotlacuali",
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASS || "root",
+    database: process.env.DB_NAME || "axotlacuali",
   });
   console.log("Conectado a la base de datos MySQL");
 } catch (err) {
